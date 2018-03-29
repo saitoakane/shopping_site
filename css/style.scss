@@ -1,7 +1,7 @@
 @charset "utf-8"; //日本語文字でエラーにならないようにする宣言
 //自動でrem数値へ変更してくれる関数
 html {
-  font-size: 62.5%;
+  font-size: 60%;
 }
 
 //mixinを追加   @incluideで呼び出せる！！
@@ -14,7 +14,7 @@ $ja_font: "ヒラギノ角ゴ Pro W3",
 "Hiragino Kaku Gothic Pro",
 メイリオ,
 Verdana,
-"ＭＳ Ｐゴシック",
+"Ｍ Ｓ Ｐゴシック",
 sans-serif;
 $maincolor: #f9f8f6; //background-color
 $white: #ffffff; //商品の中は白
@@ -25,6 +25,37 @@ $red: #a60020; //どこw
 body {
   background-color: $maincolor;
 }
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.sp_title {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  /*→PC時SP用div非表示*/
+  display: none;
+}
+
+.pc_title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 550px) {
+  .sp_title {
+    /*→SP時SP用div表示*/
+    display: block;
+  }
+  .pc_title {
+    /*→SP時PC用div非表示*/
+    display: none;
+  }
+}
+
 
 header {
 
@@ -124,7 +155,10 @@ header {
 } // header
 //---------------------------------------------------------
 #eye-catch_area {
-
+  .owl-dots {
+    text-align: left;
+    display: inline-block;
+  }
   .owl-theme .owl-dots .owl-dot span {
     width: 30px;
     height: 4px;
@@ -157,9 +191,6 @@ header {
     margin: 1px; // width: 30%; 
     width: calc(100% / 3 - 2px);
     box-sizing: border-box; //ここ忘れない！！
-  }
-  h2.logo-title {
-    text-align: center;
   }
   @media(max-width:550px) {
     .box {
@@ -318,6 +349,7 @@ header {
   }
   a {
     text-decoration: none;
+    color: black;
   }
 }
 
@@ -350,6 +382,7 @@ header {
   }
   a {
     text-decoration: none;
+    color: black;
   }
 }
 
@@ -364,15 +397,21 @@ header {
     background-color: $gray_black;
   }
   .about_box {
-    text-align: center;
-    padding: 20px 0;
+
+    padding: 20px 10px;
+    .about_icon {
+      text-align: center;
+      display: block;
+    }
     @media(max-width: 550px) {
-      display:flex;
+      display: flex;
+      padding: 20px 0;
       .box {
         width: calc(100% / 2);
       }
-    }
 
+
+    }
   }
 
 }
@@ -390,10 +429,15 @@ header {
     background-color: $gray_black;
   }
   .shopinfo_box {
-    text-align: center;
     padding: 20px 0;
+    padding: 20px 10px;
+    .shopinfo_icon {
+      text-align: center;
+      display: block;
+    }
     @media(max-width: 550px) {
       display: flex;
+      padding: 20px 0;
       .box {
         width: calc(100% / 2);
       }
@@ -454,7 +498,7 @@ footer {
 //}
 #breadcrumb_area {
   background-color: #e8e5da;
-
+  border-radius: 3px;
   .breadcrumb {
     padding: 10px 0;
     padding-left: 10px;
@@ -465,8 +509,7 @@ footer {
     display: inline;
     /*横に並ぶように*/
     list-style: none;
-    font-weight: bold;
-    /*太字*/
+
   } //.breadcrumb li:last-child:after{
   //  content: '';
   //}
@@ -561,11 +604,6 @@ footer {
       width: calc(100% / 2 - 2px);
     }
   }
-  .recently_logo {
-    margin-top: 50px;
-    margin-bottom: 30px;
-    text-align: center;
-  }
 }
 
 #products_area {
@@ -605,8 +643,27 @@ footer {
 #main {
   background-color: #ffffff;
   padding: 60px;
-  h2 {
-    font-size: 15px;
+
+  .products_title {
+    float: left;
+    width: 50%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  .products_name {
+    float: right;
+    width: 50%;
+    text-align: right;
+  }
+  @media (max-width: 550px) {
+    .products_title {
+      float: none;
+    }
+    .products_name {
+      float: none;
+      text-align: left;
+    }
   }
   .main_contaner {
     display: flex;
@@ -704,7 +761,7 @@ footer {
   border-bottom: 1px solid #e8e6da;
 
   .price_quantity {
-    flex: 2; //50%に分配してくれる
+    flex: 1; //50%に分配してくれる
   }
   .price_title {
     padding: 10px;
@@ -718,13 +775,29 @@ footer {
     margin: 0 0 0 30px;
   }
   span {
-    color: #f6005d;
-    padding-left: 55px;
+    .en {
+      font-size: 10px;
+      color: #f6005d;
+      padding-left: 10%;
+      font-weight: bold;
+      font-style: oblique;
+    }
+    .price {
+      color: #f6005d;
+      font-weight: bold;
+      font-style: oblique;
+      font-weight: bold;
+      font-style: oblique;
+      padding-right: 5px;
+    }
+    .tax {
+      font-size: 10px;
+      font-weight: bold;
+    }
   }
-
   .addcart {
     flex: 1; //50%に分配してくれる
-    padding-left: 80px;
+    margin-left: 10px;
   }
   @media(max-width: 550px) {
     flex-direction: column;
